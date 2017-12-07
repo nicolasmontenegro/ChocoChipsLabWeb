@@ -1,0 +1,53 @@
+{% load mezzanine_tags rating_tags i18n debug%}
+
+
+<h2>{% trans "Rating" %}</h2>
+<div class="row">
+
+    <ul class="col-sm-3 list-inline align-middle">
+        {% if rating_average %}
+        <li class="list-inline-item"><p>{% trans "Current rating" %}</p></li>
+        <li class="list-inline-item"><p class="font-weight-bold" id="rating-{{ rating_object.id }}">{{ rating_average|floatformat }}</p></li>             
+        {% else %}
+        <li class="list-inline-item"><p class="font-italic">{% trans "Currently unrated" %}</p></li>
+        {% endif %}
+    </ul>
+
+        
+    {% if not rated or request.user.is_authenticated %}
+    <div class="col-sm-6">
+        <form class="form-check form-check-inline" role="form" method="post" action="{% url "rating" %}">
+            <div class="form-group row align-middle">
+                <p class="col-sm-auto">{% trans "Your rating" %}</p>
+                <div class="col-auto" >
+                    {% nevercache %}
+                    {% csrf_token %}
+                    {% endnevercache %}
+
+                    <div class="btn-group" data-toggle="buttons">
+                        {% for value, name in rating_form.fields.value.choices %}
+                            <label class="btn btn-light btn-sm">
+                                <input type="radio" name="value" value="{{value}}" required> {{name}}
+                            </label>
+                        {% endfor %}
+
+                    </div>
+
+                    {{rating_form.content_type}}
+                    {{rating_form.object_pk}}
+                    {{rating_form.timestamp}}
+                    {{rating_form.security_hash}}
+                </div>
+
+                <div class="col-auto">
+                    <input type="submit" class="btn btn-default btn-sm" value="{% trans "Rate" %}"
+                        onclick="return $(this.form).find('input:checked').length == 1;">
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+
+

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load pages_tags mezzanine_tags blog_tags keyword_tags i18n staticfiles %}
+{% block meta_title %}Inicio{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" /> 
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+{% block main %}
+		<div class="row">
+	
+			<div class="col-sm-auto mx-auto" style="">
+				<object id="intro-svg" data="{% static 'img/body2.svg' %}" type="image/svg+xml"  ></object>
+				<!-- <img src="./img/body1.svg" style="height: 85vh" /> -->
+			</div>
+	
+		</div>
+    	<div class="row section" id="section1">
+			<div class="col-2 col-md-3 section-logo">
+				<img src="{% static 'img/si-glyph-code1.svg' %}" class="svg" />
+			</div>
+			<div class="col-md-9 col-lg-7">
+				<h1 class="section-title">Desarrollo fullstack</h1>
+				<p>Doggo ipsum shibe fluffer maximum borkdrive puggo smol doge pupperino long water shoob, you are doin me a concern borkdrive vvv big ol puggorino doggo. Doge heck clouds wow such tempt porgo, very jealous pupper very hand that feed shibe noodle horse pupperino, blep pupper he made many woofs.</p>
+				<p>Doing me a frighten the neighborhood pupper snoot long doggo, lotsa pats woofer, doge very good spot. Long water shoob smol corgo very hand that feed shibe noodle horse clouds, wow very biscit doggo pupper clouds, noodle horse borkf adorable doggo fat boi.</p>
+			</div>
+			<div class="col-md-12 col-lg-2 title-read-more">
+				<h1><a href="/dev/">Ver proyectos</a></h1>
+			</div>
+
+			<div class="background" style="background-color: rgba(51,0,102,1);"></div>
+	
+		</div>
+    	<div class="row section" id="section2">
+			<div class="col-2 col-md-3 section-logo">
+				<img src="{% static 'img/si-glyph-camera1.svg' %}" class="svg" />
+			</div>
+			<div class="col-md-9 col-lg-7">
+				<h1 class="section-title">Fotografía</h1>
+				<p>Doggo ipsum shibe fluffer maximum borkdrive puggo smol doge pupperino long water shoob, you are doin me a concern borkdrive vvv big ol puggorino doggo. Doge heck clouds wow such tempt porgo, very jealous pupper very hand that feed shibe noodle horse pupperino, blep pupper he made many woofs.</p>
+				<p>Doing me a frighten the neighborhood pupper snoot long doggo, lotsa pats woofer, doge very good spot. Long water shoob smol corgo very hand that feed shibe noodle horse clouds, wow very biscit doggo pupper clouds, noodle horse borkf adorable doggo fat boi.</p>
+			</div>
+			<div class="col-md-12 col-lg-2 title-read-more">
+				<h1><a href="/fotografia/">Ver álbum</a></h1>
+			</div>
+
+			<div class="background" style="background-color: rgba(51,51,51,1);"></div>
+	
+		</div>
+    	<div class="row section" id="section3">
+			<div class="col-2 col-md-3 section-logo">
+				<img src="{% static 'img/si-glyph-clapboard1.svg' %}" class="svg" />
+			</div>
+			<div class="col-md-9 col-lg-7">
+				<h1 class="section-title">Audiovisual</h1>
+				<p>Doggo ipsum shibe fluffer maximum borkdrive puggo smol doge pupperino long water shoob, you are doin me a concern borkdrive vvv big ol puggorino doggo. Doge heck clouds wow such tempt porgo, very jealous pupper very hand that feed shibe noodle horse pupperino, blep pupper he made many woofs.</p>
+				<p>Doing me a frighten the neighborhood pupper snoot long doggo, lotsa pats woofer, doge very good spot. Long water shoob smol corgo very hand that feed shibe noodle horse clouds, wow very biscit doggo pupper clouds, noodle horse borkf adorable doggo fat boi.</p>
+			</div>
+			<div class="col-md-12 col-lg-2 title-read-more">
+				<h1><a href="/audiovisual/">Ver videos</a></h1>
+			</div>
+
+			<div class="background" style="background-color: rgba(153,51,0,1);"></div>
+	
+		</div>
+    	<div class="row" id="blog">
+			<div class="col-md-12 col-lg-10">
+				<div class="row">
+					<div  id="blog-section-title">
+    					<h1>Blog</h1>
+    				</div>
+    			</div>
+				<div class="row">
+					{% blog_recent_posts 2 as recent_posts %}
+					{% if recent_posts %}
+					{% for recent_post in recent_posts %}
+					<div class="col-md-6">
+						{% block blog_post_list_post_title %}
+				            {% editable recent_post.title %}
+				            <h2 class="blog-entry-title">
+				                <a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a>
+				            </h2>
+				            {% endeditable %}
+				        {% endblock %}
+
+						{% block blog_post_list_post_metainfo %}
+					        {% editable recent_post.publish_date %}
+					        <p class="font-italic blog-entry-date">
+					            {% blocktrans with sometime=recent_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
+					        </p>
+					        {% endeditable %}
+				        {% endblock %}
+
+
+						{% block blog_post_list_post_content %}
+				            {% editable recent_post.description %}
+				                <p class="font-italic blog-entry-date">{{ recent_post.description|safe }}</p>
+				                {# {% pdb %} #}
+				            {% endeditable %}
+				        {% endblock %}
+						<h3 class="blog-read-more"><a href="{{ recent_post.get_absolute_url }}" class="label label-inverse">{% trans "ver más&hellip;" %}</a></h3>
+					</div>
+
+					{% endfor %}
+					{% endif %}
+
+				</div>
+
+			</div>
+			<div class="col-md-12 col-lg-2 title-read-more">
+				<h1><a href="/blog/">Ver más entradas</a></h1>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+/*font-family: 'Hind Siliguri', sans-serif;*/
+.container #intro-svg{
+	height: 45vh;
+	width: 100%;
+	max-height: 100%;
+}
+.section{
+	height: auto;
+	padding-top: 48px;
+	padding-bottom: 48px;
+	position: relative;
+}
+.section .svg{
+	position: absolute;
+	height: 100%;
+	width: 90%;
+	left: 0px;
+}
+.container #blog{
+	margin-top: 16px;
+	margin-bottom: 48px;
+}
+.container #blog-section-title{
+	height: auto;
+	padding-top: 32px;
+	padding-bottom: 16px;
+	position: relative;
+
+
+	display: flex;
+	flex-wrap: wrap;
+	width: calc(100% - 15px);
+	padding-left: 15px;
+}
+.container #blog .blog-entry-title{
+	margin-bottom: 0px;
+}
+.container #blog .blog-entry-date{
+	margin-bottom: 4px;
+}
+.container #blog .blog-read-more{
+	text-align: right;
+}
+.title-read-more{
+	padding-top: 84px;
+}
+
+
+@media(max-width:575px){
+	.navbar{
+		padding: 32px 32px 32px 32px;
+	}
+	.navbar.on-scroll{
+		padding: 0px 32px 0px 32px;
+	}
+	.navbar a, .navbar span{
+		margin: 0px;
+	}

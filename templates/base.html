@@ -1,0 +1,120 @@
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Nicolás Montenegro">
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+	<meta name="description" content="{% block meta_description %}{% endblock %}">
+
+    <title>{% block meta_title %}{% endblock %} - {% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }}{% endif %}</title>
+
+    {% ifinstalled mezzanine.blog %}
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+	<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+	{% endifinstalled %}
+
+    {% compress css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-4.0.0-beta.2-dist/css/bootstrap.css' %}" /> 
+    <link href="https://fonts.googleapis.com/css?family=Cairo|Hind+Siliguri" rel="stylesheet"> 
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-4.0.0-beta.2-dist/css/bootstrap.css' %}" /> 
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" /> 
+    {% block extra_css %}{% endblock %}
+    {% endcompress %}
+
+    {% compress js %}
+
+    <script type="text/javascript" src="{% static 'vendor/jquery-3.2.1/jquery-3.2.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendor/popper.js-1.12.9/popper.js' %}"></script>
+
+
+    <script type="text/javascript" src="{% static 'vendor/bootstrap-4.0.0-beta.2-dist/js/bootstrap.js' %}"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+    {% endcompress %}
+
+
+	{% block extra_head %}{% endblock %}
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-xl fixed-top">
+    	<a class="navbar-brand d-block d-sm-none title-bg" href="#" >CCL</a>
+      	{% if settings.SITE_TITLE %}{% editable settings.SITE_TITLE %}<a class="navbar-brand d-none d-sm-block title-bg" href="/">{{ settings.SITE_TITLE }}</a>{% endeditable %}{% endif %}</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        	<span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    	{% block navbar_dropdown_menu %}{% page_menu "pages/menus/dropdown.html" %}{% endblock%}
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+
+    	{% block title %}{% endblock %}
+    	{% block main %}{% endblock %}
+
+
+		<div class="row" id="footer">
+
+			<div class="col-md-5">
+				<h1>Nicolás Montenegro Varela</h1>
+				<p><a href="mailto:nicolas.montenegro@outlook.com">
+					<span>
+						<img src="{% static 'img/si-glyph-mail.svg' %}" style="height: 16px" />
+					</span>
+					<span>
+						nicolas.montenegro@outlook.com
+					</span>
+				</a></p>
+				<p><a href="https://github.com/nicolasmontenegro">
+					<span>
+						<img src="{% static 'img/Octicons-mark-github.svg' %}" style="height: 16px" />
+					</span>
+					<span>
+						github.com/nicolasmontenegro
+					</span>
+				</a></p>
+				<p><a href="https://www.youtube.com/channel/UCte_M0Et4_2uaw9iwLujD-A">
+					<span>
+						<img src="{% static 'img/YouTube_icon_light.svg' %}" style="height: 16px" />
+					</span>
+					<span>
+						ChocoChips Lab
+					</span>
+				</a></p>
+
+			</div>
+			<div class="col-md-1 d-none d-md-block" id="v-line">
+			</div>
+			<div class="col-md-5">
+			</div>	
+
+			<div class="background" style="background-color: rgba(255, 255, 255, 1);"></div>
+
+		</div>
+
+    </main>
+
+
+  </body>
+
+  <footer>
+  	
+  	{% include "includes/footer_scripts.html" %}
+
+  </footer>
+
+</html>
