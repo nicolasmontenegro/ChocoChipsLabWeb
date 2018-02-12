@@ -325,6 +325,16 @@ if os.path.exists(f):
     exec(open(f, "rb").read())
 
 
+else:
+    try:
+        import dj_database_url
+        db_from_env = dj_database_url.config()
+        DATABASES['default'].update(db_from_env)
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    except ImportError:
+        pass
+
+
 ####################
 # DYNAMIC SETTINGS #
 ####################
