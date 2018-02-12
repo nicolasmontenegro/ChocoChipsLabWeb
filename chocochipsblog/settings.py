@@ -276,6 +276,9 @@ MIDDLEWARE_CLASSES = (
     "mezzanine.core.middleware.SitePermissionMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 )
 
 # Store these package names here as they may change in the future since
