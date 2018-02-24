@@ -317,7 +317,12 @@ OPTIONAL_APPS = (
 # local_settings has full access to everything defined in this module.
 # Also force into sys.modules so it's visible to Django's autoreload.
 
-f = os.path.join(PROJECT_APP_PATH, "local_settings.py")
+
+filename_aditional_settings = "local_settings.py"
+if os.environ.get('ENV_TYPE') == "PRODUCTION"
+    filename = "prod_settings.py"
+
+f = os.path.join(PROJECT_APP_PATH, filename_aditional_settings)
 if os.path.exists(f):
     import sys
     import imp
@@ -326,29 +331,6 @@ if os.path.exists(f):
     module.__file__ = f
     sys.modules[module_name] = module
     exec(open(f, "rb").read())
-
-
-else:
-    try:
-        import dj_database_url
-        db_from_env = dj_database_url.config()
-        DATABASES['default'].update(db_from_env)
-    except ImportError:
-        pass
-    
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    # Static files (CSS, JavaScript, Images)
-    # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = '/static/'
-
-    # Extra places for collectstatic to find static files.
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
 
 
 
