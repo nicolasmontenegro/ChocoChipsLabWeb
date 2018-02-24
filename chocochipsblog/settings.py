@@ -319,7 +319,7 @@ OPTIONAL_APPS = (
 
 
 filename_aditional_settings = "local_settings.py"
-if os.environ.get('ENV_TYPE') == "PRODUCTION"
+if os.environ.get('ENV_TYPE') == "PRODUCTION":
     filename = "prod_settings.py"
 
 f = os.path.join(PROJECT_APP_PATH, filename_aditional_settings)
