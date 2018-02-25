@@ -93,7 +93,7 @@ urlpatterns += [
     # Note that for any of the various homepage patterns above, you'll
     # need to use the ``SITE_PREFIX`` setting as well.
 
-    # ("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
+    url("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
 
 ]
 
